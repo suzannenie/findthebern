@@ -1,6 +1,6 @@
 'use strict';
 
-var socket = io();
+var socket = io.connect('https://findthebern.herokuapp.com/:8080');
 let name;
 let points;
 var level = 0;

@@ -15,8 +15,7 @@ sio.init_app(app, cors_allowed_origins="*")
 players = Players()
 # key: sid, value: player
 sidDict = dict()
-info = dict()
-info["level"] = 0
+info = {"level": 0, "total": 6}
 
 
 @app.route("/")
@@ -57,7 +56,7 @@ def won_round(name):
     winner = sidDict[sid]
     players.reSort(winner)
 
-    level = (info["level"] + 1) % 2
+    level = (info["level"] + 1) % info["total"]
     info["level"] = level
 
     sio.emit('your_score', winner.to_html(), room=sid)
@@ -79,3 +78,4 @@ def disconnect():
 
 if __name__ == "__main__":
     sio.run(app, debug=True)
+

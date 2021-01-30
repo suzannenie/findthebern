@@ -5,10 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+<br>
 <div class="center">
     <div id="home">
-        <br>
         <div class="row align-items-center">
             <div class="col-auto">
                 <label for="name_input" class="col-form-label">Input
@@ -61,7 +60,7 @@
         <img class="slides" src="{{url_for('static',
         filename='slideshow/img7.jpg')}}"/>
         <img class="slides" src="{{url_for('static',
-        filename='slideshow/img8.jpeg')}}"/>
+        filename='slideshow/img8.png')}}"/>
         <img class="slides" src="{{url_for('static',
         filename='slideshow/img9.jpg')}}"/>
         <img class="slides" src="{{url_for('static',
@@ -84,11 +83,44 @@
     <div class="row">
         <div class="column left">
             Goal: find Bernie the fastest
-            <br>
+            <br><br>
             <div id="your_score"></div>
+            <h6>Leaderboard</h6>
             <div id="leaderboard"></div>
         </div>
         <div class="column right fill">
+            <div class="levels">
+                <img src="../static/finding/find10.jpg" usemap="#image_map10"
+                     style="width:800px;height:auto;">
+                <map name="image_map10">
+                    <area class="found" href="" coords="240,173,271,234"
+                          shape="rect">
+                </map>
+            </div>
+            <div class="levels">
+                <img src="../static/finding/find5.jpg" usemap="#image_map5"
+                     style="width:700px;height:auto;">
+                <map name="image_map5">
+                    <area class="found" href="" coords="509,313,537,360"
+                          shape="rect">
+                </map>
+            </div>
+            <div class="levels">
+                <img src="../static/finding/find4.jpg" usemap="#image_map4"
+                     style="width:800px;height:auto;">
+                <map name="image_map4">
+                    <area class="found" href="" coords="734,239,774,297"
+                          shape="rect">
+                </map>
+            </div>
+            <div class="levels">
+                <img src="../static/finding/find3.jpg" usemap="#image_map3"
+                     style="width:700px;height:auto;">
+                <map name="image_map3">
+                    <area class="found" href="" coords="221,254,252,300"
+                          shape="rect">
+                </map>
+            </div>
             <div class="levels">
                 <img src="../static/finding/find2.jpg" usemap="#image_map2"
                      style="width:700px;height:auto;">

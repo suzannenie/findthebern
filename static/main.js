@@ -1,7 +1,7 @@
 'use strict';
 
 //'https://findthebern.herokuapp.com/:8080'
-var socket = io.connect('https://findthebern.herokuapp.com/:8080');
+var socket = io.connect();
 let name;
 let points;
 var level = 0;

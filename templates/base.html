@@ -19,6 +19,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
             integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title> Find the Bern{% block title %} {% endblock %}</title>
     {% block top %} {% endblock %}
@@ -54,7 +55,10 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
 {% block scripts %} {% endblock %}
-
+<script type="text/javascript"
+        src="{{url_for('static', filename='main.js')}}">
+</script>
 
 </body>
 </html>
+

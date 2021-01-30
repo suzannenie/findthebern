@@ -82,14 +82,30 @@
 
 <div id="game" style="display:none">
     <div class="row">
-        <div class="col col-lg-2">
+        <div class="column left">
             Goal: find Bernie the fastest
             <br>
-            <div id="leaderboard">
-            </div>
+            <div id="your_score"></div>
+            <div id="leaderboard"></div>
         </div>
-        <div class="col-md-auto">
-            Variable width content
+        <div class="column right fill">
+            <div class="levels">
+                <img src="../static/finding/find2.jpg" usemap="#image_map2"
+                     style="width:700px;height:auto;">
+                <map name="image_map2">
+                    <area class="found" href="" coords="381,316,459,499"
+                          shape="rect">
+                </map>
+            </div>
+            <div class="levels">
+                <img src="../static/finding/find1.jpg" usemap="#image_map1"
+                     style="width:800px;height:auto;">
+                <map name="image_map1">
+                    <area class="found" href="" coords="20,270,75,450"
+                          shape="rect">
+                </map>
+            </div>
+
         </div>
     </div>
     <br>
@@ -102,6 +118,4 @@
 {% block scripts %}
 <script type="text/javascript"
         src="{{url_for('static', filename='home.js')}}"></script>
-<script type="text/javascript"
-        src="{{url_for('static', filename='main.js')}}"></script>
 {% endblock %}

@@ -60,3 +60,19 @@ th, td {
   margin-left: 0em;
   font-size: 1em;
 }
+
+.row {
+    display: flex;
+}
+
+.column {
+  float: left;
+}
+
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+}

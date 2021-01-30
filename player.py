@@ -8,6 +8,10 @@ class Player:
         self.points = 0
         self.index = -1
 
+    def to_html(self):
+        return "<p>You (" + self.name + ") have " + str(self.points) + " " \
+                                                                "points</p><br>"
+
 
 class Players:
     def __init__(self):
@@ -32,6 +36,7 @@ class Players:
         assert(self.checkIndices())
 
     def reSort(self, winner):
+        winner.points += 1
         i = winner.index
         while i > 0:
             prev = self.players[i - 1]

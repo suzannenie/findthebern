@@ -15,6 +15,8 @@ sio.init_app(app, cors_allowed_origins="*")
 players = Players()
 # key: sid, value: player
 sidDict = dict()
+info = dict()
+info["level"] = 0
 
 
 @app.route("/")
@@ -39,10 +41,28 @@ def join_game(name):
     players.insertPlayer(new)
     sidDict[request.sid] = new
 
-    you = "<p>You (" + name + ") have " + str(new.points) + " points</p><br>"
-    sio.emit('leaderboard', you+players.toTable())
+    sio.emit('your_score', new.to_html(), room=request.sid)
+    sio.emit('leaderboard', players.toTable())
+    sio.emit('current_round', info["level"])
 
     print(sidDict)
+
+
+@sio.on('won_round')
+def won_round(name):
+    print(name, "won round")
+    sid = request.sid
+    if sid not in sidDict:
+        print("failed win", sid)
+    winner = sidDict[sid]
+    players.reSort(winner)
+
+    level = (info["level"] + 1) % 2
+    info["level"] = level
+
+    sio.emit('your_score', winner.to_html(), room=sid)
+    sio.emit('leaderboard', players.toTable())
+    sio.emit('current_round', level)
 
 
 @sio.on('disconnect')
@@ -54,8 +74,8 @@ def disconnect():
         players.removePlayer(p)
 
     print('Disconnected', request.sid)
-    print(sidDict)
+    sio.emit('leaderboard', players.toTable())
 
 
 if __name__ == "__main__":
-    sio.run(app)
+    sio.run(app, debug=True)

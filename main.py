@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 from player import *
+from levels import Levels
 
 
 app = Flask(__name__)
@@ -15,12 +16,12 @@ sio.init_app(app, cors_allowed_origins="*")
 players = Players()
 # key: sid, value: player
 sidDict = dict()
-info = {"level": 0, "total": 6}
+info = {"level": 0, "total": len(Levels)}
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", levels=Levels)
 
 
 @app.route("/hideabern")

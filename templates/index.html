@@ -85,58 +85,21 @@
             Goal: find Bernie the fastest
             <br><br>
             <div id="your_score"></div>
-            <h6>Leaderboard</h6>
+            <h5 style="text-align:center">Leaderboard</h5>
             <div id="leaderboard"></div>
         </div>
         <div class="column right fill">
-            <div class="levels">
-                <img src="../static/finding/find10.jpg" usemap="#image_map10"
-                     style="width:800px;height:auto;">
-                <map name="image_map10">
-                    <area class="found" href="" coords="240,173,271,234"
-                          shape="rect">
-                </map>
-            </div>
-            <div class="levels">
-                <img src="../static/finding/find5.jpg" usemap="#image_map5"
-                     style="width:700px;height:auto;">
-                <map name="image_map5">
-                    <area class="found" href="" coords="509,313,537,360"
-                          shape="rect">
-                </map>
-            </div>
-            <div class="levels">
-                <img src="../static/finding/find4.jpg" usemap="#image_map4"
-                     style="width:800px;height:auto;">
-                <map name="image_map4">
-                    <area class="found" href="" coords="734,239,774,297"
-                          shape="rect">
-                </map>
-            </div>
-            <div class="levels">
-                <img src="../static/finding/find3.jpg" usemap="#image_map3"
-                     style="width:700px;height:auto;">
-                <map name="image_map3">
-                    <area class="found" href="" coords="221,254,252,300"
-                          shape="rect">
-                </map>
-            </div>
-            <div class="levels">
-                <img src="../static/finding/find2.jpg" usemap="#image_map2"
-                     style="width:700px;height:auto;">
-                <map name="image_map2">
-                    <area class="found" href="" coords="381,316,459,499"
-                          shape="rect">
-                </map>
-            </div>
-            <div class="levels">
-                <img src="../static/finding/find1.jpg" usemap="#image_map1"
-                     style="width:800px;height:auto;">
-                <map name="image_map1">
-                    <area class="found" href="" coords="20,270,75,450"
-                          shape="rect">
-                </map>
-            </div>
+            {% for level in levels %}
+                <div class="levels">
+                    <img src="../static/finding/{{level.filename}}"
+                         usemap="#image_map{{level.filename}}"
+                         style="width:{{level.width}};height:auto;">
+                    <map name="image_map{{level.filename}}">
+                        <area class="found" href="" coords={{level.coords}}
+                              shape="rect">
+                    </map>
+                </div>
+            {% endfor %}
 
         </div>
     </div>

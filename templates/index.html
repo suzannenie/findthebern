@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block title %}{% endblock %}
+{% block top %}
+
+{% endblock %}
 
 {% block content %}
+
+<div id="hi"></div>
 
 <div class="center">
     <br>
@@ -12,18 +17,20 @@
         </div>
         <div class="col-auto">
             <input type="name" id="name_input" class="form-control"
-                   style="width:35vw;">
+                   style="width:35vw;" required>
         </div>
         <div class="col-auto">
             <span class="form-text">or nickname who's checking</span>
+            <div id="empty" style="color:blue; display:none">put a name</div>
         </div>
     </div>
     <br>
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <button type="button" class="btn btn-secondary">Find
-                    Bern :D
+                <button type="button" class="btn btn-secondary"
+                        onclick="toFind()">
+                    Find Bern :D
                 </button>
                 <br>competitive mode for those feeling spicy
             </div>
@@ -78,4 +85,7 @@
 {% block scripts %}
 <script type="text/javascript"
         src="{{url_for('static', filename='home.js')}}"></script>
+<script type="text/javascript"
+        src="{{url_for('static', filename='main.js')}}">
+</script>
 {% endblock %}

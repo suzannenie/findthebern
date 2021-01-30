@@ -20,11 +20,8 @@
             integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
             crossorigin="anonymous"></script>
 
-    <script type="text/javascript"
-            src="{{url_for('static', filename='main.js')}}">
-    </script>
-
     <title> Find the Bern{% block title %} {% endblock %}</title>
+    {% block top %} {% endblock %}
 </head>
 
 <body>
@@ -57,5 +54,7 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
 {% block scripts %} {% endblock %}
+
+
 </body>
 </html>

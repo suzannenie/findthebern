@@ -78,5 +78,5 @@ def disconnect():
 
 
 if __name__ == "__main__":
-    sio.run(app, debug=True, port=8080)
+    sio.run(app, debug=True, host='findthebern.herokuapp.com', port=5004)
 

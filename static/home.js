@@ -15,3 +15,8 @@ function carousel() {
   x[slideIndex-1].style.display = "";
   setTimeout(carousel, 2000); // Change image every 2 seconds
 }
+
+
+function toHide() {
+    window.location.href = "/hideabern";
+}

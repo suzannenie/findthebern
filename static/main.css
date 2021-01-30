@@ -76,3 +76,8 @@ th, td {
 .right {
   width: 75%;
 }
+
+area {
+  display: block;
+  cursor: auto;
+}

@@ -11,16 +11,13 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <label for="name_input" class="col-form-label">Input
-                     Name, click mode</label>
+                     name, then click one of the three modes</label>
+                <div id="empty" style="color:blue; display:none">put a name
+                </div>
             </div>
             <div class="col-auto">
                 <input type="name" id="name_input" class="form-control"
                        style="width:35vw;" required>
-            </div>
-            <div class="col-auto">
-                <span class="form-text">or nickname who's checking</span>
-                <div id="empty" style="color:blue; display:none">put a name
-                </div>
             </div>
         </div>
         <br>
@@ -28,14 +25,20 @@
             <div class="row">
                 <div class="col-sm">
                     <button type="button" class="btn btn-secondary"
-                            onclick="toFind()">
-                        Find Bern :D
+                            onclick="toSolo()">Time Trial
                     </button>
-                    <br>competitive mode for those feeling spicy
+                    <br>finish 5 rounds as fast as possible
                 </div>
                 <div class="col-sm">
                     <button type="button" class="btn btn-secondary"
-                            style="background-color: $pink-500">Hide
+                            onclick="toFind()">
+                        Find Bern :D
+                    </button>
+                    <br>compete in real time against others
+                </div>
+                <div class="col-sm">
+                    <button type="button" class="btn btn-secondary"
+                            onclick="toHide();">Hide
                         Your Own Bern
                     </button>
                     <br>creative mode if you're feeling aRtsY
@@ -43,38 +46,44 @@
             </div>
         </div>
 
-        <br>
-        <!-- Slideshow container -->
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img1.jpeg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img2.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img3.jpeg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img4.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img5.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img6.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img7.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img8.jpeg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img9.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img10.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img11.jpeg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img12.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img13.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img14.jpg')}}"/>
-        <img class="slides" src="{{url_for('static',
-        filename='slideshow/img3.jpeg')}}"/>
+        <div class="row">
+            <div class="col-lg-3">
+                <div id="top_three"></div>
+            </div>
+            <div class="col-lg-9">
+                <!-- Slideshow container -->
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img1.jpeg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img2.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img3.jpeg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img4.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img5.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img6.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img7.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img8.jpeg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img9.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img10.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img11.jpeg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img12.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img13.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img14.jpg')}}"/>
+                <img class="slides" src="{{url_for('static',
+                filename='slideshow/img3.jpeg')}}"/>
+            </div>
+        </div>
 
     </div>
 </div>
@@ -90,21 +99,48 @@
         </div>
         <div class="column right fill">
             {% for level in levels %}
-                <div class="levels">
-                    <img src="../static/finding/{{level.filename}}"
-                         usemap="#image_map{{level.filename}}"
-                         style="width:{{level.width}};height:auto;">
-                    <map name="image_map{{level.filename}}">
-                        <area class="found" href="" coords={{level.coords}}
-                              shape="rect">
-                    </map>
-                </div>
+            <div class="levels">
+                <img src="../static/finding/{{level.filename}}"
+                     usemap="#image_map{{level.filename}}"
+                     style="width:{{level.width}};height:auto;">
+                <map name="image_map{{level.filename}}">
+                    <area class="found" href="" coords={{level.coords}}
+                          shape="rect">
+                </map>
+            </div>
             {% endfor %}
 
         </div>
     </div>
     <br>
 
+</div>
+
+
+<div id="solo" style="display:none">
+    <h4>Stopwatch:
+        <span class="time" id="stopwatch" style="color: blue">00:00:00</span>
+    </h4>
+    <div class="center" id="solo_done" style="display:none">
+        <h4>Leaderboard</h4>
+        <div id="top_three2"></div><br>
+        <button type="button" class="btn btn-secondary"
+                onclick="location.reload();">Return Home
+        </button>
+    </div>
+    <div id="solo_game" class="center">
+        {% for level in solos %}
+        <div class="solos">
+            <img src="../static/finding/{{level.filename}}"
+                 usemap="#solo_map{{level.filename}}"
+                 style="width:{{level.width}};height:auto;">
+            <map name="solo_map{{level.filename}}">
+                <area class="found_solo" href="" coords={{level.coords}}
+                      shape="rect">
+            </map>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 

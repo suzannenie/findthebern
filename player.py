@@ -57,3 +57,38 @@ class Players:
             l = [i+1, self.players[i].name, self.players[i].points]
             table.append(l)
         return tabulate(table, tablefmt='html')
+
+
+class Solo:
+    def __init__(self, name, date, time):
+        self.name = name
+        self.time = time
+        self.date = date
+
+
+class TopThree:
+    def __init__(self):
+        self.top = []
+
+    def insert(self, solo):
+        length = len(self.top)
+        self.top.append(solo)
+        i = length
+        while i > 0:
+            prev = self.top[i - 1]
+            if solo.time >= prev.time:
+                break
+            self.top[i - 1] = solo
+            self.top[i] = prev
+            i -= 1
+        if length == 3:
+            self.top = self.top[:3]
+
+    def toTable(self):
+        headers = ["rank", "name", "date", "time"]
+        table = [headers]
+        end = min(len(self.top), 3)
+        for i in range(end):
+            l = [i+1, self.top[i].name, self.top[i].date, self.top[i].time]
+            table.append(l)
+        return tabulate(table, tablefmt='html')

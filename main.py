@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
+import random
+from datetime import date
 from player import *
-from levels import Levels
+from levels import Levels, Solos
 
 
 app = Flask(__name__)
@@ -14,6 +16,7 @@ sio.init_app(app, cors_allowed_origins="*")
 
 
 players = Players()
+topSolos = TopThree()
 # key: sid, value: player
 sidDict = dict()
 info = {"level": 0, "total": len(Levels)}
@@ -21,16 +24,21 @@ info = {"level": 0, "total": len(Levels)}
 
 @app.route("/")
 def index():
-    return render_template("index.html", levels=Levels)
+    nums = random.sample(Solos, 5)
+    levels = []
+    for i in nums:
+        levels.append(Levels[i-1])
+    return render_template("index.html", levels=Levels, solos=levels)
 
 
 @app.route("/hideabern")
 def hide():
-    return render_template("find.html")
+    return render_template("hide.html")
 
 
 @sio.on('connect')
 def connected():
+    sio.emit('update_solos', topSolos.toTable())
     print('Connected to index', request.namespace, request.sid)
 
 
@@ -65,6 +73,13 @@ def won_round(name):
     sio.emit('current_round', level)
 
 
+@sio.on('finish_solo')
+def finish_solo(name, time):
+    new = Solo(name, date.today().strftime("%m/%d/%y"), time)
+    topSolos.insert(new)
+    sio.emit('update_solos', topSolos.toTable())
+
+
 @sio.on('disconnect')
 def disconnect():
     sid = request.sid
@@ -78,5 +93,6 @@ def disconnect():
 
 
 if __name__ == "__main__":
-    sio.run(app, debug=True, host='findthebern.herokuapp.com', port=5004)
+    sio.run(app)
+    # sio.run(app, debug=True, host='findthebern.herokuapp.com', port=5004)
 

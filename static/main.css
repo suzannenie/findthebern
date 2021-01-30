@@ -22,3 +22,22 @@ html, body {
   height: 60px;
   background-color: #f5f5f5;
 }
+
+.center {
+  margin: auto;
+  width: 80%;
+  text-align: center;
+}
+
+img {
+    height: 50vh;
+}
+
+.tiptop {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+  background-image: url('slideshow/background.jpeg');
+  text-align: center;
+  color: black;
+}

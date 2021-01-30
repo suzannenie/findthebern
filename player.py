@@ -1,6 +1,10 @@
+from tabulate import tabulate
+
+
 class Player:
-    def __init__(self, name):
+    def __init__(self, name, sid):
         self.name = name
+        self.sid = sid
         self.points = 0
         self.index = -1
 
@@ -39,3 +43,12 @@ class Players:
             prev.index = i
             i -= 1
         assert self.checkIndices()
+
+    def toTable(self):
+        headers = ["rank", "name", "points"]
+        table = [headers]
+        end = min(len(self.players), 5)
+        for i in range(end):
+            l = [i+1, self.players[i].name, self.players[i].points]
+            table.append(l)
+        return tabulate(table, tablefmt='html')

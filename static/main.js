@@ -2,6 +2,17 @@
 
 var socket = io();
 let name;
+let points;
+
+socket.on('connect', function() {
+    console.log("connected")
+});
+
+socket.on('leaderboard', function(data) {
+    console.log('leaderboard');
+    document.getElementById("leaderboard").innerHTML = data;
+});
+
 
 function toFind () {
     console.log("to find");
@@ -11,11 +22,8 @@ function toFind () {
         return;
     }
     else {
-        console.log("here");
-        socket.emit('join_game', name);;
+        socket.emit('join_game', name);
+        document.getElementById("home").style.display = "none";
+        document.getElementById("game").style.display = "";
     }
 }
-
-socket.on('connect', function() {
-    console.log("connected")
-});
